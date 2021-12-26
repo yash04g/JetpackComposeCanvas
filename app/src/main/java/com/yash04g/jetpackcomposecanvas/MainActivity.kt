@@ -31,17 +31,11 @@ import com.yash04g.jetpackcomposecanvas.ui.theme.JetpackComposeCanvasTheme
 
 @Composable
 fun DrawGradientText(name: String, modifier: Modifier = Modifier) {
-
-//    val paint = Paint().asFrameworkPaint()
     val nudgeGradientList = listOf(
         Color(0xFFD9B031),
         Color(0xFFFFE490),
         Color(0xFFD9B031),
     )
-//    val nudgeGradientList = listOf(
-//        Color.Red,
-//        Color.Blue,
-//    )
 
     Canvas(modifier) {
         val gradientShader: Shader = LinearGradientShader(
@@ -50,13 +44,6 @@ fun DrawGradientText(name: String, modifier: Modifier = Modifier) {
             nudgeGradientList,
             tileMode = TileMode.Mirror
         )
-//        paint.apply {
-//            isAntiAlias = true
-//            textSize = 50f
-//            typeface = Typeface.DEFAULT_BOLD
-//            style = android.graphics.Paint.Style.FILL
-//            xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-//        }
         val paint = Paint()
         paint.isAntiAlias = true
         paint.textAlign = Paint.Align.LEFT
@@ -65,19 +52,8 @@ fun DrawGradientText(name: String, modifier: Modifier = Modifier) {
         paint.typeface = Typeface.DEFAULT_BOLD
 
         drawIntoCanvas { canvas ->
-//            canvas.save()
-//            canvas.nativeCanvas.translate(2f, 5f)
-//            canvas.nativeCanvas.drawText(name, 0f, 50f, paint)
-//            canvas.restore()
-//            paint.shader = gradientShader
-//            paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OVER)
-//            canvas.nativeCanvas.drawText(name, 0f, 50f, paint)
-//            canvas.nativeCanvas.translate(2f, 5f)
-//            paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OVER)
-//            canvas.nativeCanvas.drawText(name, 0f, 50f, paint)
             canvas.nativeCanvas.drawText(name, 0f, 10.sp.toPx(), paint)
         }
-//        paint.reset()
     }
 }
 
@@ -93,13 +69,8 @@ class MainActivity : ComponentActivity() {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(20.dp)
                 )
                 {
-                    Text("Hello World", fontSize = 10.sp, modifier = Modifier.onGloballyPositioned {
-                        it.size.width
-                    })
-
                     AnimatedVisibility(
                         visible = showText,
                         enter = expandHorizontally(animationSpec = tween(durationMillis = 1000)),
@@ -108,8 +79,8 @@ class MainActivity : ComponentActivity() {
                         DrawGradientText(
                             name = "UPGRADE",
                             modifier = Modifier
-                                .width(60.dp)
                                 .height(10.dp)
+                                .width(60.dp)
                                 .clickable {
                                     showText = false
                                 }
@@ -118,11 +89,16 @@ class MainActivity : ComponentActivity() {
                     DrawGradientText(
                         name = "SUBSCRIBE",
                         modifier = Modifier
-                            .width(60.dp)
                             .height(10.dp)
+                            .width(60.dp)
                             .clickable {
                                 showText = true
                             }
+                    )
+                    Text(
+                        text = ">",
+                        color = Color.Yellow,
+                        modifier = Modifier.padding(start = 10.dp)
                     )
                 }
             }
